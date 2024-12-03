@@ -42,7 +42,7 @@ export async function POST(request: Request) {
     return Response.json(
       {
         success: true,
-        message: "Message acceptance status updated successfully",
+        message: `${updatedUser.isAcceptingMessage ? "Message acceptance turned on successfully" : "User will not be accepting messages right now"}`,
         updatedUser,
       },
       { status: 200 }
