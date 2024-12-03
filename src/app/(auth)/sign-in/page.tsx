@@ -65,7 +65,7 @@ export default function SignInForm() {
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
             QuietConnect
           </h1>
-          <p className="mb-4">Sign in to start your unknown adventure</p>
+          <p className="mb-4">Sign in to start your anonymous adventure</p>
         </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
