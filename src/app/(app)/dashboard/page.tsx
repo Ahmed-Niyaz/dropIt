@@ -10,7 +10,7 @@ import { acceptMessageSchema } from "@/schemas/acceptMessageSchema";
 import { ApiResponse } from "@/types/ApiResponse";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios, { AxiosError } from "axios";
-import { Loader2, RefreshCcw } from "lucide-react";
+import { Dot, Loader2, RefreshCcw } from "lucide-react";
 import { User } from "next-auth";
 import { useSession } from "next-auth/react";
 import { useCallback, useEffect, useState } from "react";
@@ -135,33 +135,40 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="my-8 mx-4 md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
+    <div className="my-8 mx-auto md:mx-8 lg:mx-auto p-6 bg-white rounded w-full max-w-6xl">
       <h1 className="text-4xl font-bold mb-4 text-center">User Dashboard</h1>
-      <div className="mb-4">
+      
+      <div className="flex items-center justify-between">
+
+      <div className="my-4 py-4">
         <h2 className="text-lg font-semibold mb-2">Copy Your Unique Link</h2>{" "}
         <div className="flex items-center">
           <input
             type="text"
             value={profileUrl}
             disabled
-            className="input input-bordered w-full p-2 mr-2"
+            className="input input-bordered p-2 mr-2"
           />
           <Button onClick={copyToClipboard}>Copy</Button>
         </div>
       </div>
 
-      <div className="mb-4">
+      <div className="flex items-center">
+      <span className="mr-2">
+          Accept Messages: {acceptMessages ? 'On' : 'Off'}
+        </span>
       <Switch
           {...register('acceptMessages')}
           checked={acceptMessages}
           onCheckedChange={handleSwitchChange}
           disabled={isSwitchLoading}
         />
-        <span className="ml-2">
-          Accept Messages: {acceptMessages ? 'On' : 'Off'}
-        </span>
+       
+        <Dot className={`inline-block ${acceptMessages ? 'text-green-500' : 'text-red-500' } `} size={48} />
       </div>
-      <Separator />
+
+      </div>
+      <Separator className="mt-6 mb-4" />
 
       <Button
         className="mt-4"

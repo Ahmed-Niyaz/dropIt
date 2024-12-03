@@ -152,7 +152,7 @@ export default function SendMessage() {
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Write your anonymous message here"
+                    placeholder="Enter your message here"
                     className="resize-none"
                     {...field}
                   />

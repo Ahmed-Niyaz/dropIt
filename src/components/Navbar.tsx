@@ -17,9 +17,9 @@ export default function Navbar() {
   return (
     <nav className="p-4 md:p-6 shadow-md bg-gray-900 text-white">
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
-        <a href="#" className="text-xl font-bold mb-4 md:mb-0">
-          Anonymous Message
-        </a>
+        <Link href="/dashboard" className="text-xl font-bold mb-4 md:mb-0">
+          QuietConnect
+        </Link>
         {session ? (
           <>
             {/* <span className="mr-4">
@@ -31,10 +31,15 @@ export default function Navbar() {
 
             <DropdownMenu>
               <DropdownMenuTrigger className="border-none">
-                <span className="select-none">@{user.username || user.email}</span>
+                <span className="select-none">
+                  @{user.username || user.email}
+                </span>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem className="text-center" onClick={() => signOut()}>
+                <DropdownMenuItem
+                  className="text-center"
+                  onClick={() => signOut()}
+                >
                   Logout
                 </DropdownMenuItem>
               </DropdownMenuContent>
