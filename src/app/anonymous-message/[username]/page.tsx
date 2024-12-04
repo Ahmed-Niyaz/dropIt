@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { Dot, Frown, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
-// import { useCompletion } from "ai/react";
+import { useCompletion } from "ai/react";
 import {
   Form,
   FormControl,
@@ -25,30 +25,31 @@ import { useParams } from "next/navigation";
 import { messageSchema } from "@/schemas/messageSchema";
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
-// const specialChar = "||";
+const specialChar = "||";
 
-// const parseStringMessages = (messageString: string): string[] => {
-//   return messageString.split(specialChar);
-// };
+const parseStringMessages = (messageString: string): string[] => {
+  return messageString.split(specialChar);
+};
 
-// const initialMessageString =
-//   "What's your favorite movie?||Do you have any pets?||What's your dream job?";
+const initialMessageString =
+  "What's your favorite movie?||Do you have any pets?||What's your dream job?";
 
 export default function SendMessage() {
   const params = useParams<{ username: string }>();
   const username = params.username;
   const { toast } = useToast();
 
-  // const {
-  //   complete,
-  //   completion,
-  //   isLoading: isSuggestLoading,
-  //   error,
-  // } = useCompletion({
-  //   api: "/api/suggest-messages",
-  //   initialCompletion: initialMessageString,
-  // });
+  const {
+    complete,
+    completion,
+    isLoading: isSuggestLoading,
+    error,
+  } = useCompletion({
+    api: "/api/suggest-messages",
+    initialCompletion: initialMessageString,
+  });
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -56,9 +57,9 @@ export default function SendMessage() {
 
   const messageContent = form.watch("content");
 
-  // const handleMessageClick = (message: string) => {
-  //   form.setValue("content", message);
-  // };
+  const handleMessageClick = (message: string) => {
+    form.setValue("content", message);
+  };
 
   const [isLoading, setIsLoading] = useState(false);
   const [isAcceptingMsg, setIsAcceptingMsg] = useState(true);
@@ -89,14 +90,14 @@ export default function SendMessage() {
     }
   };
 
-  // const fetchSuggestedMessages = async () => {
-  //   try {
-  //     complete("");
-  //   } catch (error) {
-  //     console.error("Error fetching messages:", error);
-  //     // Handle error appropriately
-  //   }
-  // };
+  const fetchSuggestedMessages = async () => {
+    try {
+      complete("");
+    } catch (error) {
+      console.error("Error fetching messages:", error);
+      // Handle error appropriately
+    }
+  };
 
   const checkIfUserAcceptingMessage = async () => {
     try {
@@ -178,12 +179,12 @@ export default function SendMessage() {
 
       {/* this is for ai suggested messages */}
 
-      {/* <div className="space-y-4 my-8">
+       <div className="space-y-4 my-8">
         <div className="space-y-2">
           <Button
             onClick={fetchSuggestedMessages}
             className="my-4"
-            disabled={isSuggestLoading}
+            // disabled={isSuggestLoading}
           >
             Suggest Messages
           </Button>
@@ -210,7 +211,7 @@ export default function SendMessage() {
             )}
           </CardContent>
         </Card>
-      </div> */}
+      </div> 
 
       <Separator className="my-6" />
       <div className="text-center">
