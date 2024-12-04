@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Dot, Frown, Loader2 } from "lucide-react";
+import { Dot, Frown, Loader2, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useCompletion } from "ai/react";
@@ -41,15 +41,17 @@ export default function SendMessage() {
   const username = params.username;
   const { toast } = useToast();
 
-  const {
-    complete,
-    completion,
-    isLoading: isSuggestLoading,
-    error,
-  } = useCompletion({
-    api: "/api/suggest-messages",
-    initialCompletion: initialMessageString,
-  });
+  // const {
+  //   complete,
+  //   completion,
+  //   isLoading: isSuggestLoading,
+  //   error,
+  // } = useCompletion({
+  //   api: "/api/suggest-messages",
+  //   initialCompletion: initialMessageString,
+  // });
+
+  const [genAiMessages, setGenAiMessages] = useState(parseStringMessages(initialMessageString));
 
   const form = useForm<z.infer<typeof messageSchema>>({
     resolver: zodResolver(messageSchema),
@@ -63,6 +65,7 @@ export default function SendMessage() {
 
   const [isLoading, setIsLoading] = useState(false);
   const [isAcceptingMsg, setIsAcceptingMsg] = useState(true);
+  const [isGenAIMessagesLoading, setIsGenAIMessagesLoading] = useState(false);
 
   const onSubmit = async (data: z.infer<typeof messageSchema>) => {
     setIsLoading(true);
@@ -90,14 +93,35 @@ export default function SendMessage() {
     }
   };
 
-  const fetchSuggestedMessages = async () => {
+
+  const fetchGenAISuggestedMessages = async () => {
+    setIsGenAIMessagesLoading(true);
     try {
-      complete("");
+      const response = await axios.get('/api/suggest-message');
+      const result = parseStringMessages(response.data);
+      setGenAiMessages(result);
     } catch (error) {
-      console.error("Error fetching messages:", error);
-      // Handle error appropriately
+      console.error("Error getting messages from genAI",error);
+      setGenAiMessages(parseStringMessages(initialMessageString));
+      toast({
+        title: 'Error',
+        description: 'Error getting messages',
+        variant: 'destructive'
+      })
+    } finally{
+      setIsGenAIMessagesLoading(false);
     }
-  };
+  }
+
+  // this one for streaming text type
+  // const fetchSuggestedMessages = async () => {
+  //   try {
+  //     complete("");
+  //   } catch (error) {
+  //     console.error("Error fetching messages:", error);
+  //     // Handle error appropriately
+  //   }
+  // };
 
   const checkIfUserAcceptingMessage = async () => {
     try {
@@ -182,9 +206,9 @@ export default function SendMessage() {
        <div className="space-y-4 my-8">
         <div className="space-y-2">
           <Button
-            onClick={fetchSuggestedMessages}
+            onClick={fetchGenAISuggestedMessages}
             className="my-4"
-            // disabled={isSuggestLoading}
+            disabled={isGenAIMessagesLoading}
           >
             Suggest Messages
           </Button>
@@ -195,12 +219,12 @@ export default function SendMessage() {
             <h3 className="text-xl font-semibold">Messages</h3>
           </CardHeader>
           <CardContent className="flex flex-col space-y-4">
-            {error ? (
-              <p className="text-red-500">{error.message}</p>
+            {isGenAIMessagesLoading ? (
+              <LoaderCircle className="animate-spin" />
             ) : (
-              parseStringMessages(completion).map((message, index) => (
+              genAiMessages.map((message) => (
                 <Button
-                  key={index}
+                  key={message}
                   variant="outline"
                   className="mb-2"
                   onClick={() => handleMessageClick(message)}
