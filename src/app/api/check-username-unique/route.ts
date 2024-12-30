@@ -21,8 +21,6 @@ export async function GET(request: Request) {
     // this is syntax where it takes object hence the queryParam is object
     const result = UsernameQuerySchema.safeParse(queryParam);
 
-    console.log("--->this is result after safe parsing it with zod",result); // TODO: remove
-
     if (!result.success) {
       const usernameErrors = result.error.format().username?._errors || [];
 

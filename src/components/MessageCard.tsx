@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useToast } from "@/hooks/use-toast";
 import { Message } from "@/model/User";
 import { ApiResponse } from "@/types/ApiResponse";
@@ -6,6 +6,7 @@ import axios, { AxiosError } from "axios";
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
@@ -21,14 +22,21 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "./ui/button";
-import { X } from "lucide-react";
+import { Mail, X } from "lucide-react";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 type MessageCardProps = {
   message: Message;
   onMessageDelete: (messgeId: string) => void;
 };
 
-export default function MessageCard({message, onMessageDelete}: MessageCardProps) {
+export default function MessageCard({
+  message,
+  onMessageDelete,
+}: MessageCardProps) {
   const { toast } = useToast();
 
   const handleDeleteMessage = async () => {
@@ -50,22 +58,22 @@ export default function MessageCard({message, onMessageDelete}: MessageCardProps
       });
     }
   };
+
+  const formattedDate = dayjs(message.createdAt).fromNow();
+
   return (
-    <Card className="card-bordered">
-      <CardHeader>
-        <div className="flex justify-between items-center">
-          <CardTitle>
-            {message.content}
-            </CardTitle>
+    <Card className="card-bordered relative">
+      <CardContent className="flex flex-col md:flex-row items-start md:space-y-0 md:space-x-4 pl-0 pb-3">
+        <div className="absolute top-2 right-2">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">
-                <X className="w-5 h-5" />
+              <Button variant="destructive" size="sm">
+                <X className="w-3 h-3" />
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
-                <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>
                   This action cannot be undone. This will permanently delete
                   this message.
@@ -80,11 +88,15 @@ export default function MessageCard({message, onMessageDelete}: MessageCardProps
             </AlertDialogContent>
           </AlertDialog>
         </div>
-        <div className="text-sm">
-          {/* {da yjs(message.createdAt).format('MMM D, YYYY h:mm A')} */}
+
+        <div className="flex pt-4 pr-4 gap-3 justify-center items-start">
+          <Mail className="flex-shrink-0" />
+          <div>
+            <p className="max-w-[95%] text-lg">{message.content}</p>
+            <p className="text-sm text-muted-foreground">{formattedDate}</p>
+          </div>
         </div>
-      </CardHeader>
-      <CardContent></CardContent>
+      </CardContent>
     </Card>
   );
 }

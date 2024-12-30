@@ -55,17 +55,17 @@ function VerifyUser() {
     }
   };
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-8 bg-white rounded-lg shadow-md">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="w-full max-w-md p-8 space-y-8 rounded-lg shadow-2xl border">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl mb-6">
+          <h1 className="text-2xl font-extrabold tracking-tight lg:text-3xl mb-6">
             Verify your account
           </h1>
           <p className="mb-4">Enter the verification code sent to your email</p>
         </div>
 
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 flex flex-col justify-center items-center text-center">
             <FormField
               name="code"
               control={form.control}
@@ -74,7 +74,7 @@ function VerifyUser() {
                   <FormLabel>Verification Code</FormLabel>
                   <Input {...field} />
 
-                  {/* tryial */}
+                  {/* trial */}
                   {/* <InputOTP maxLength={6}>
                     <InputOTPGroup {...field}>
                       <InputOTPSlot index={0} />
