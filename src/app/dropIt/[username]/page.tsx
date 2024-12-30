@@ -168,10 +168,10 @@ export default function SendMessage() {
         Public Profile Link
       </h1>
 
-      <div>
+      <div className="">
         <div className="flex flex-col items-center justify-around">
-          <div className="">
-            <div className="py-10">
+          <div className="w-full flex justify-center items-center">
+            <div className="py-10 w-[80%]">
               <Form {...form}>
                 <form
                   onSubmit={form.handleSubmit(onSubmit)}
@@ -235,7 +235,7 @@ export default function SendMessage() {
 
           {/* this is for ai suggested messages */}
 
-          <div className="space-y-4 my-8">
+          <div className="w-full max-w-[80%] space-y-4 my-8">
             <div className="space-y-2">
               <div className="flex justify-between items-center">
                 <Button

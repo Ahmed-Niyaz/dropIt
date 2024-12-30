@@ -185,12 +185,24 @@ export default function DashboardPage() {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col space-y-3 mt-8 justify-center items-center">
-        <Skeleton className="h-[500px] w-[80%] rounded-xl" />
-        <div className="space-y-2">
+      <div className="flex flex-col space-y-3 mt-10 justify-center items-center">
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        <Skeleton className="h-10 w-[80%]" />
+        {/* <Skeleton className="h-[500px] w-[80%] rounded-xl">
           <Skeleton className="h-4 w-[80%]" />
           <Skeleton className="h-4 w-[80%]" />
-        </div>
+        </Skeleton> */}
       </div>
     );
   }
