@@ -3,7 +3,7 @@
 ## Overview
 DropIt is a web application that enables anonymous messaging and feedback sharing. Users can create accounts, receive anonymous messages, and manage their inbox.
 
-## [Live Project](https://feast-flow-project.vercel.app/)
+## [Live Project](https://dropit-psi.vercel.app)
 
 ## ✨ Features
 
@@ -49,7 +49,7 @@ DropIt is a web application that enables anonymous messaging and feedback sharin
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/Ahmed-Niyaz/FeastFlow.git
+git clone https://github.com/Ahmed-Niyaz/dropIt.git
 cd FeastFlow
 ```
 
@@ -62,12 +62,12 @@ yarn install
 
 3. Create a `.env` file with the following variables:
 ```
-DATABASE_URL="your_database_url"
-JWT_SECRET="your_jwt_secret"
-STRIPE_API_SECRET="your_stripe_api_secret"
-NEXT_PUBLIC_API_URL="your_api_url"
+MONGO_URI='MONGO_URI'
+RESEND_API_KEY='YOUR_RESEND_KEY'
+AUTH_SECRET='YOUR_SECRET_KEY'
+GOOGLE_GENERATIVE_AI_API_KEY='YOUR_KEY'
+GOOGLE_API_KEY='YOUR_GOOGLE_API_KEY'
 ```
-use http://localhost:3000 for "NEXT_PUBLIC_API_URL" for local development
 
 4. Start the development server:
 ```bash
