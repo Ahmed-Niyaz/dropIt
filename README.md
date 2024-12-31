@@ -1,48 +1,48 @@
-# DropIt - Anonymous Messaging Platform
+# DropIt 📬
 
 ## Overview
-DropIt is a web application that enables anonymous messaging and feedback sharing. Users can create accounts, receive anonymous messages, and manage their inbox.
+DropIt is a web app for anonymous messaging and feedback. Users can create accounts, receive messages anonymously, and manage their inbox.
 
 ## [Live Project](https://dropit-psi.vercel.app)
 
 ## ✨ Features
 
-### User Management
-- Secure user authentication with email/username login
-- Username availability checking in real-time
-- Email verification system for new accounts
-- Customizable message acceptance settings
+### 🔐 User Management
+- Secure user authentication with email/username login.
+- Real-time username availability checking.
+- Email verification for new accounts.
+- Customizable message acceptance settings.
 
-### Dashboard
-- Unique profile links for receiving messages
-- Real-time message filtering and search
-- Message management (view, delete)
-- Toggle message acceptance status
+### 📊 Dashboard
+- Unique profile links for receiving messages.
+- Real-time message filtering and search.
+- Message management (view, delete).
+- Toggle message acceptance status.
 
-### AI-Powered Features
-- Dynamic message generation using Google's Gemini 1.5 Pro
-
-## Tech Stack
+### 🤖 AI-Powered Features
+- Dynamic message generation using Google's Gemini 1.5 Pro.
 
 ## 🛠️ Tech Stack
 
 - **Framework**: [Next.js](https://nextjs.org/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/)
 - **UI Components**: [shadcn/ui](https://ui.shadcn.com/)
-- **Database Integration**: API routes with [Axios](https://axios-http.com/)
-- **Authentication**: JWT-based authentication system
+- **Database Integration**: MongoDB with [Mongoose](https://mongoosejs.com/)
+- **Authentication**: [NextAuth.js](https://next-auth.js.org/) (JWT-based)
+- **HTTP Requests**: [Axios](https://axios-http.com/)
 
 ## 🚀 Key Features Implementation
 
-- **Smart Caching**: Local storage caching for food items with configurable duration
-- **Seamless Cart Sync**: Real-time synchronization between local storage and database
-- **Live Updates**: Automatic polling for order status changes
+- **Anonymous Messaging**: Send anonymous messages to registered users.
+- **Message Search**: Search messages by keywords for easy retrieval.
+- **Message Acceptance Control**: Enable or disable the acceptance of messages.
+- **Profile Link System**: Unique, shareable profile links for receiving anonymous messages.
 
 ## Getting Started
 
 ### Prerequisites
 - Node.js (v18 or higher)
-- MongoDB connection
+- A MongoDB instance
 - Google AI API key (for AI features)
 
 ## 💻 Local Development
